@@ -1,8 +1,7 @@
 import pickle
-from pathlib import Path
-
+import os
 # Load the model at startup
-MODEL_PATH = Path("models/spam_classifier_model.pkl")
+MODEL_PATH = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(__file__))), "models/spam_classifier_model.pkl")
 
 with open(MODEL_PATH, "rb") as model_file:
     model = pickle.load(model_file)

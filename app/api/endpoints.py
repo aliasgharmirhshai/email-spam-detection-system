@@ -1,6 +1,6 @@
 from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel
-from app.services.spam_filter import predict_spam
+from services.spam_filter import predict_spam
 
 router = APIRouter(prefix="/email", tags=["Email Detection"])
 
@@ -17,7 +17,7 @@ def detect_spam(email: EmailRequest):
     Detects if the email is spam or not.
     """
     try:
-        prediction = predict_spam(email.subject, email.body)
+        prediction = predict_spam(email.subject, email.body, email.sender)
         return {"spam": prediction, "message": "Detection successful"}
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))

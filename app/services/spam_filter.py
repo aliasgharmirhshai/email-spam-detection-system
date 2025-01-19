@@ -1,12 +1,14 @@
 import pickle
 import os
+import joblib
 
 # Load the model at startup
-MODEL_PATH = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(__file__))), "models/spam_classifier_model.pkl")
+MODEL = "stacking_model.pkl"
+MODEL_PATH = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(__file__))), f"models/{MODEL}")
 BLACKLIST_PATH = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(__file__))), "Data/blacklist.txt")
 
 with open(MODEL_PATH, "rb") as model_file:
-    model = pickle.load(model_file)
+    model = joblib.load(model_file)
 
 def load_blacklist():
     if os.path.exists(BLACKLIST_PATH):
